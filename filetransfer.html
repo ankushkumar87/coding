@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        fieldset {
+            background-color: antiquewhite;
+            height: 100px;
+            width: 500px;
+        }
+
+        span {
+            color: rgb(33, 16, 219);
+        }
+
+        ol li {
+            margin: 10px;
+            color: blueviolet;
+        }
+
+        #upld {
+            height: 30px;
+            width: 75px;
+            color: rgb(36, 16, 219);
+            background-color: rgb(185, 205, 205);
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend>File Upload Validation Only Javascript</legend>
+        Select Image: <input type="file" id="f1" name="f1"><br><br>
+        <input type="button" value="upload file" name="upld" id="upld"><br>
+        <span id="msg"></span>
+    </fieldset>
+    <caption><span>Validation criteria:</span></caption>
+    <ol type="numric">
+        <li>Image format Allowed Only Jpg/png &gif.</li>
+        <li>Image size is less than 2MB Allowed.</li>
+        <li> Empty file uploaded not Allowed.</li>
+    </ol>
+    <script>
+        var ex = [".jpg", ".jpeg",".png", ".gif"];
+        var upload = document.querySelector("#upld");
+        var massg = document.querySelector("#msg");
+        upload.addEventListener('click', () => {
+            var file = document.querySelector("#f1");
+            var fvalue = file.value;
+            if (fvalue!= '') {
+                var fex = fvalue.substring(fvalue.lastIndexOf("."), fvalue.length);
+                var fsize=file.files.item(0).size;
+                fsize_kb=Math.round(fsize/1024);
+                console.log(fsize_kb);
+                console.log(fsize);
+                if(ex.includes(fex)){
+                      if(fsize_kb<=2048){
+                             massg.innerText="File Uploaded Successfully!!";
+                      }
+                      else{
+                        massg.innerText="Select File size less than 2MB.";
+                      }
+                }
+                else{
+                    massg.innerText ="Plz select only jpg png & gif.";
+                }
+            }
+            else
+                massg.innerText = "Plz Select Image:";
+        })
+    </script>
+</body>
+
+</html>
